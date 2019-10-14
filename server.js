@@ -1,16 +1,24 @@
 const express = require('express');
 const sqlite3 = require('sqlite3');
-const Sequelize = require('sequelize');
+// const Sequelize = require('sequelize');
 
 const app = express();
 app.use(express.json());
 
+// Import controllers
+const tasks = require('./controllers/tasks');
+
+app.set('view engine', 'pug');
+
+app.get('/tasks', tasks.home);
+
 // Definimos la conexión con sequelize
 // Parametros: db, usuario, password, json con datos de config(conectro base de datos, si es sqlite el archivo donde esta la db)
-const sequelize = new Sequelize('proyecto-backend', null, null, {
-  dialect: 'sqlite',
-  storage: './proyecto-backend'
-});
+// const sequelize = new Sequelize('proyecto-backend', null, null, {
+//   dialect: 'sqlite',
+//   storage: './proyecto-backend'
+// });
+
 
 // ruta POST para crear un registro tarea
 app.post('/pendientes', (req, res) => {
